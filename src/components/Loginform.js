@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import db from "../firebase";
 
 function Loginform() {
@@ -9,26 +9,13 @@ function Loginform() {
         email: "",
         phone: ""
     })
-    const [userData, setUserData] = useState([]);
 
     const handlevalue = (e, key) => {
-        setValue(prev => ({ ...prev, [key]: e.target.value }))
+        setValue ({ ...val, [key]: e.target.value })
     }
-    useEffect(() => {
-        db.collection("userData").onSnapshot((snapshot) => {
-            setUserData(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    data: doc.data(),
-                }))    
-            );
-        });
-        console.log({ userData });
-    }, []);
 
-    const deleteData = (id) => {
-        db.collection("userData").doc(id).delete();
-    };
+    const updateData = () => {
+    }
 
     const addDocs = async (e) => {
         e.preventDefault()
@@ -38,13 +25,15 @@ function Loginform() {
                 email: val.email,
                 phone: val.phone
             })
-            setValue({})
+        setValue({})
         console.log("Document written with ID: ", docRef.id);
+        alert("store successfully")
     }
+
     return (
         < div className="style">
             <h1 className="text-center p-3">LOGIN</h1>
-            <form 
+            <form
                 onSubmit={addDocs}>
                 <div className="form-group m-3">
                     <label>Name</label>
@@ -60,32 +49,11 @@ function Loginform() {
                 </div>
                 <button type="submit" className="btn btn-primary m-3">Submit</button>
             </form>
-            <div className="table table-hover">
-                <table>
-                    <tr>
-                        <th scope="col">*</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">EMAIL</th>
-                        <th scope="col">CONTACT</th>
-                        <th scope="col">TRASH</th>
-                    </tr>
-
-                    {userData?.map(({ id, data }) => (
-                        <tr key={id}>
-                            <th scope="row">*</th>
-                            <td>{data.name}</td>
-                            <td>{data.email}</td>
-                            <td>{data.phone}</td>
-                            <td><button className="btn btn-primary" onClick={()=>{
-                                deleteData(id)
-                            }} >DELETE</button></td>
-                        </tr>
-                    ))}
-                </table>
-            </div>
+            <a href="http://localhost:3000/show">SHOW DATA LIST</a>
         </div>
     )
 }
+
 export default Loginform
 
 
