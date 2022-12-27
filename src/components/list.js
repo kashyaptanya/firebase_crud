@@ -1,6 +1,7 @@
 import db from "../firebase";
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function List() {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ function List() {
     return (
         <div className="text-center style">
             <h1>DATA</h1>
-            <a href="http://localhost:3000">HOME</a>
+            <Link  to="/">Home</Link>
             <div className="table table-hover m-5 ">
                 <table>
                     <tr>
