@@ -1,6 +1,7 @@
 
 import React, { useState } from "react"
 import db from "../firebase";
+import { Link } from "react-router-dom";
 
 function Loginform() {
 
@@ -49,7 +50,8 @@ function Loginform() {
                 </div>
                 <button type="submit" className="btn btn-primary m-3">Submit</button>
             </form>
-            <a href="http://localhost:3000/show">SHOW DATA LIST</a>
+            <Link  to="/show">SHOW DATA LIST</Link>
+
         </div>
     )
 }
